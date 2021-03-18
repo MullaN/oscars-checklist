@@ -8,6 +8,14 @@ body {
   margin: auto;
 }
 
+h1 {
+  font-family: 'Spartan', sans-serif;
+}
+
+h2 {
+  text-align: left;
+}
+
 .MuiCheckbox-colorPrimary.Mui-checked {
   color: rgb(155, 144, 96) !important;
 }
