@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import AllMovies from './Containers/AllMovies';
 
@@ -6,7 +5,10 @@ function App() {
   return (
     <div className="App">
       <h1>Oscars Checklist</h1>
-      <AllMovies />
+      <h2>Feature Films</h2>
+      <AllMovies type='movies'/>
+      <h2>Short Films</h2>
+      <AllMovies type='shorts'/>
     </div>
   );
 }

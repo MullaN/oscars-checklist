@@ -7,9 +7,19 @@ class AllMovies extends Component {
     }
 
     componentDidMount(){
-        fetch('http://localhost:5000/api/movies')
+        fetch(`http://192.168.50.119:5000/api/${this.props.type}`)
         .then(res => res.json())
-        .then(movies => this.setState({movies}))
+        .then(movies => {
+            movies = movies.sort((a,b) => {
+                let editedA = a.title.replace('The ','')
+                let editedB = b.title.replace('The ','')
+                console.log(editedA, editedB)
+                if(editedA < editedB) { return -1; }
+                if(editedA > editedB) { return 1; }
+                return 0;
+            })
+            this.setState({movies})
+        })
     }
 
     render(){

@@ -1,3 +1,20 @@
+body {
+  background-color: rgb(155, 144, 96);
+}
+
 .App {
   text-align: center;
+  width: 60%;
+  margin: auto;
+}
+
+.MuiCheckbox-colorPrimary.Mui-checked {
+  color: rgb(155, 144, 96) !important;
+}
+
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  .App{
+    width: 100%
+  }
 }
