@@ -6,6 +6,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { makeStyles } from '@material-ui/core/styles';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import { Typography } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     movie: {
@@ -24,13 +25,13 @@ const Movie = (props) => {
     return (
         <div>
             <Accordion>
-                <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls='panelia-content' id={`title-${props.movie.id}-header`} className={classes.movie}>
+                <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls='panelia-content' id={`title-${props.movie.id}-header`}>
                     <FormControlLabel
                     aria-label="Acknowledge"
                     onClick={(event) => event.stopPropagation()}
                     onFocus={(event) => event.stopPropagation()}
                     control={<Checkbox color='primary' checked={props.checked} onClick={() => props.checkMovie(props.movie.id)}/>}
-                    label={props.movie.title}
+                    label={<Typography className={classes.movie}>{props.movie.title}</Typography>}
                     />
                 </AccordionSummary>
                 <AccordionDetails className={classes.nominations}>

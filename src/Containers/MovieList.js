@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Movie from '../Components/Movie'
 
-class AllMovies extends Component {
+class MovieList extends Component {
     state = {
         movies: [],
         checked: []
@@ -33,7 +33,7 @@ class AllMovies extends Component {
     checkMovie = (id) => {
         let tempChecked = this.state.checked
         let findCheck = tempChecked.filter(check => check.id === id)[0]
-        findCheck.checked = true
+        findCheck.checked = !findCheck.checked
         this.setState({checked: tempChecked})
     }
 
@@ -46,4 +46,4 @@ class AllMovies extends Component {
     }
 }
 
-export default AllMovies
+export default MovieList
