@@ -1,5 +1,7 @@
 body {
-  background-color: rgb(155, 144, 96);
+  background-color: rgb(235, 226, 190);
+  font-family: 'Spartan', sans-serif;
+  color: rgb(155, 144, 96);
 }
 
 .App {
@@ -9,11 +11,15 @@ body {
 }
 
 h1 {
-  font-family: 'Spartan', sans-serif;
+  font-weight: 100;
 }
 
 h2 {
   text-align: left;
+}
+
+.MuiFormControlLabel-label {
+  font-family: 'Spartan', sans-serif;
 }
 
 .MuiCheckbox-colorPrimary.Mui-checked {

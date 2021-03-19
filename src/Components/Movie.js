@@ -9,7 +9,8 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 const useStyles = makeStyles((theme) => ({
     movie: {
-        textAlign: 'left'
+        textAlign: 'left',
+        fontFamily: ['Spartan', 'sans-serif']
     },
     nominations:{
         flexDirection: 'column',
@@ -28,7 +29,7 @@ const Movie = (props) => {
                     aria-label="Acknowledge"
                     onClick={(event) => event.stopPropagation()}
                     onFocus={(event) => event.stopPropagation()}
-                    control={<Checkbox color='primary'/>}
+                    control={<Checkbox color='primary' checked={props.checked} onClick={() => props.checkMovie(props.movie.id)}/>}
                     label={props.movie.title}
                     />
                 </AccordionSummary>
