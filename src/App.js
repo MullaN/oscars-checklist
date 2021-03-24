@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import './App.css';
 import MovieList from './Containers/MovieList';
+import Countdown from './Components/Countdown'
 
 class App extends Component {
   state = {
@@ -50,7 +51,8 @@ class App extends Component {
   render(){
     return (
       <div className="App">
-        <h1>2021 Oscars Checklist</h1>
+        <h1>2021 OSCARS Checklist</h1>
+        <Countdown />
         <h2>Feature Films</h2>
         <MovieList checkMovie={this.checkMovie} movies={this.state.movies} checked={this.state.moviesChecked} type='movies'/>
         <h2>Short Films</h2>
