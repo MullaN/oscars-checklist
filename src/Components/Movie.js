@@ -30,7 +30,7 @@ const Movie = (props) => {
                     aria-label="Acknowledge"
                     onClick={(event) => event.stopPropagation()}
                     onFocus={(event) => event.stopPropagation()}
-                    control={<Checkbox color='primary' checked={props.checked} onClick={() => props.checkMovie(props.movie.id)}/>}
+                    control={<Checkbox color='primary' checked={props.checked} onClick={() => props.checkMovie(props.movie.id, props.type)}/>}
                     label={<Typography className={classes.movie}>{props.movie.title}</Typography>}
                     />
                 </AccordionSummary>
