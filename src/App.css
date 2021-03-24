@@ -19,6 +19,10 @@ h2 {
   text-align: left;
 }
 
+.countdown-number {
+  font-size: 6vh;
+}
+
 .MuiCheckbox-colorPrimary.Mui-checked {
   color: rgb(155, 144, 96) !important;
 }

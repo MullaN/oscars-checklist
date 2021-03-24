@@ -1,4 +1,5 @@
 import React, {useEffect, useState}from 'react'
+import Grid from '@material-ui/core/Grid'
 
 const Countdown = () => {
     const timeLeft = () => {
@@ -21,9 +22,20 @@ const Countdown = () => {
     })
 
     return(
-        <>
-            {countdown.days} days, {countdown.hours} hours, {countdown.minutes} minutes until the OSCARS
-        </>
+        <Grid container className='countdown' spacing={2} justify='center'>
+            <Grid item>
+                <span className="countdown-number">{countdown.days}</span><br />
+                DAYS
+            </Grid>
+            <Grid item>
+                <span className="countdown-number">{countdown.hours}</span><br />
+                HOURS
+            </Grid>
+            <Grid item>
+                <span className="countdown-number">{countdown.minutes}</span><br />
+                MINUTES
+            </Grid>
+        </Grid>
     )
 }
 
