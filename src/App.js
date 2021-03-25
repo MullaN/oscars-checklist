@@ -10,7 +10,7 @@ class App extends Component {
   render(){
     return (
       <div className="App">
-        <h1>2021 OSCARS Checklist</h1>
+        <h1>2021 OSCARS CHECKLIST</h1>
         <Countdown />
         <Router history={history}>
             <Route path='/' exact component={() => <AllMoviesContainer />} />
