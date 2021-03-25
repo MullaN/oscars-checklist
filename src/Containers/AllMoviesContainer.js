@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
-import {BrowserRouter as Redirect} from 'react-router-dom'
 import MovieList from './MovieList';
+import history from '../history';
 import Button from '@material-ui/core/Button'
 
 class AllMoviesContainer extends Component {
@@ -85,12 +85,12 @@ class AllMoviesContainer extends Component {
 
     render(){
         if (this.state.saveId !== "" && !this.props.match){
-            return <Redirect to='/test' />
+            history.push(`/${this.state.saveId}`)
         }
         return ( 
             <>
                 
-                <Button variant='contained' disabled={this.state.recentSave} onClick={this.saveList}>{this.state.recentSave ? 'List Saved' : 'Save List'}</Button>
+                <Button variant='contained' color='primary' disabled={this.state.recentSave} onClick={this.saveList}>{this.state.recentSave ? 'List Saved' : 'Save List'}</Button>
                 <h2>Feature Films</h2>
                 <MovieList checkMovie={this.checkMovie} movies={this.state.movies} checked={this.state.moviesChecked} type='movies'/>
                 <h2>Short Films</h2>
