@@ -22,11 +22,13 @@ class AllMoviesContainer extends Component {
             this.setupMovie(movies, 'movies')
             this.setupMovie(shorts, 'shorts')
         })
-        if (this.props.match && this.props.match.params.id) {
-            fetch(`https://oscars-checklist-backend.herokuapp.com/api/saved/${this.props.match.params.id}`)
-            .then(resp => resp.json())
-            .then(data => this.setState({moviesChecked: data.movies, shortsChecked: data.shorts}))
-        }
+        .then(() => {
+            if (this.props.match && this.props.match.params.id) {
+                fetch(`https://oscars-checklist-backend.herokuapp.com/api/saved/${this.props.match.params.id}`)
+                .then(resp => resp.json())
+                .then(data => this.setState({moviesChecked: data.movies, shortsChecked: data.shorts}))
+            }
+        })
     }
 
     setupMovie(data, type){
