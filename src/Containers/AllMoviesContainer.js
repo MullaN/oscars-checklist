@@ -14,7 +14,7 @@ class AllMoviesContainer extends Component {
       }
     
     componentDidMount(){
-        Promise.all([fetch('http://142.93.254.33:5000/api/movies'), fetch('http://142.93.254.33:5000/api/shorts')])
+        Promise.all([fetch('https://oscars-checklist-backend.herokuapp.com/api/movies'), fetch('https://oscars-checklist-backend.herokuapp.com/api/shorts')])
         .then(([resp1, resp2]) => {
             return Promise.all([resp1.json(), resp2.json()])
         })
@@ -23,7 +23,7 @@ class AllMoviesContainer extends Component {
             this.setupMovie(shorts, 'shorts')
         })
         if (this.props.match && this.props.match.params.id) {
-            fetch(`http://142.93.254.33:5000/api/saved/${this.props.match.params.id}`)
+            fetch(`https://oscars-checklist-backend.herokuapp.com/api/saved/${this.props.match.params.id}`)
             .then(resp => resp.json())
             .then(data => this.setState({moviesChecked: data.movies, shortsChecked: data.shorts}))
         }
@@ -57,7 +57,7 @@ class AllMoviesContainer extends Component {
 
     saveList = () => {
         if (this.props.match && this.props.match.params.id) {
-            fetch(`http://142.93.254.33:5000/api/saved/${this.props.match.params.id}`, {
+            fetch(`https://oscars-checklist-backend.herokuapp.com/api/saved/${this.props.match.params.id}`, {
                 method: 'PUT',
                 headers: {
                 'Content-Type': 'application/json'
@@ -69,7 +69,7 @@ class AllMoviesContainer extends Component {
                 this.setState({recentSave: true})
             })
         } else {
-            fetch('http://142.93.254.33:5000/api/saved', {
+            fetch('https://oscars-checklist-backend.herokuapp.com/api/saved', {
                 method: 'POST',
                 headers: {
                 'Content-Type': 'application/json'
@@ -90,7 +90,7 @@ class AllMoviesContainer extends Component {
         return ( 
             <>
                 <Button variant='contained' disabled={this.state.recentSave} onClick={this.saveList}>{this.state.recentSave ? 'List Saved' : 'Save List'}</Button>
-                {this.state.recentSave ? <><br /><br /><span>Your list has been saved at <a href={`http://localhost:3000/${this.state.saveId}`}>{`http://localhost:3000/${this.state.saveId}`}</a>. Be sure to bookmark or save this link to keep your checklist!</span></> : <></>}
+                {this.state.recentSave ? <><br /><br /><span>Your list has been saved at <a href={`https://oscars-checklist.web.app/${this.state.saveId}`}>{`oscars-checklist.web.app/${this.state.saveId}`}</a>. Be sure to bookmark or save this link to keep your checklist!</span></> : <></>}
                 <h2>Feature Films</h2>
                 <MovieList checkMovie={this.checkMovie} movies={this.state.movies} checked={this.state.moviesChecked} type='movies'/>
                 <h2>Short Films</h2>
