@@ -13,10 +13,15 @@ body {
 h1 {
   font-weight: 100;
   font-size: 5vw;
+  margin: 1vw auto;
 }
 
 h2 {
   text-align: left;
+}
+
+#live-text {
+  font-size: 5vh;
 }
 
 .countdown-number {
