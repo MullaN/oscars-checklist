@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import MovieList from './MovieList';
 import history from '../history';
-import Button from '@material-ui/core/Button'
+import Savebox from '../Components/Savebox'
 
 class AllMoviesContainer extends Component {
     state = {
@@ -91,12 +91,12 @@ class AllMoviesContainer extends Component {
         }
         return ( 
             <>
-                <Button variant='contained' disabled={this.state.recentSave} onClick={this.saveList}>{this.state.recentSave ? 'List Saved' : 'Save List'}</Button>
-                {this.state.recentSave ? <><br /><br /><span>Your list has been saved at <a href={`https://oscars-checklist.web.app/${this.state.saveId}`}>{`oscars-checklist.web.app/${this.state.saveId}`}</a>. Be sure to bookmark or save this link to keep your checklist!</span></> : <></>}
                 <h2>Feature Films</h2>
                 <MovieList checkMovie={this.checkMovie} movies={this.state.movies} checked={this.state.moviesChecked} type='movies'/>
                 <h2>Short Films</h2>
                 <MovieList checkMovie={this.checkMovie} movies={this.state.shorts} checked={this.state.shortsChecked} type='shorts'/>
+                <div className='bottom-spacing'></div>
+                <Savebox recentSave={this.state.recentSave} saveList={this.saveList} saveId={this.state.saveId}/>
             </>
         )
     }

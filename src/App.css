@@ -32,10 +32,21 @@ h2 {
   color: rgb(155, 144, 96) !important;
 }
 
+.bottom-spacing {
+  height: 300px;
+}
 @media only screen and (max-width: 768px) {
   /* For mobile phones: */
   .App{
     width: 100%
+  }
+
+  .countdown-number {
+    font-size: 10vw;
+  }
+
+  #live-text {
+    font-size: 8vw;
   }
 
   h1 {
