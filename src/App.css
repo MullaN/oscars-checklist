@@ -12,7 +12,7 @@ body {
 
 h1 {
   font-weight: 100;
-  font-size: 5vw;
+  font-size: 4vw;
   margin: 1vw auto;
 }
 
@@ -21,11 +21,11 @@ h2 {
 }
 
 #live-text {
-  font-size: 5vh;
+  font-size: 2vw;
 }
 
 .countdown-number {
-  font-size: 6vh;
+  font-size: 2vw;
 }
 
 .MuiCheckbox-colorPrimary.Mui-checked {
