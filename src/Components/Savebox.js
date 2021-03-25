@@ -24,8 +24,7 @@ export default function BottomAppBar({recentSave, saveList, saveId}) {
   return (
     <React.Fragment>
       <AppBar position="fixed" color="primary" className={classes.appBar}>
-        <Button className={classes.button} variant='contained' disabled={recentSave} onClick={saveList}>{recentSave ? 'List Saved' : 'Save List'}</Button>
-        {recentSave ? <><br /><br /><span>Your list has been saved at <a href={`https://oscars-checklist.web.app/${saveId}`}>{`oscars-checklist.web.app/${saveId}`}</a>. Be sure to bookmark or save this link to keep your checklist!</span></> : <></>}
+        {recentSave ? <><br /><br /><span>Your list has been saved at <a href={`https://oscars-checklist.web.app/${saveId}`}>{`oscars-checklist.web.app/${saveId}`}</a>. Be sure to bookmark or save this link to keep your checklist!</span></> : <Button className={classes.button} variant='contained' disabled={recentSave} onClick={saveList}>{recentSave ? 'List Saved' : 'Save List'}</Button>}
       </AppBar>
     </React.Fragment>
   );

@@ -54,35 +54,30 @@ class AllMoviesContainer extends Component {
         let tempChecked = this.state[`${type}Checked`]
         let findCheck = tempChecked.filter(check => check.id === id)[0]
         findCheck.checked = !findCheck.checked
-        this.setState({[`${type}Checked`]: tempChecked, recentSave: false})
-    }
-
-    saveList = () => {
-        if (this.props.match && this.props.match.params.id) {
-            fetch(`https://oscars-checklist-backend.herokuapp.com/api/saved/${this.props.match.params.id}`, {
+        this.setState({[`${type}Checked`]: tempChecked})
+        if (this.state.saveId !== '') {
+            fetch(`https://oscars-checklist-backend.herokuapp.com/api/saved/${this.state.saveId}`, {
                 method: 'PUT',
                 headers: {
                 'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({movies: this.state.moviesChecked, shorts: this.state.shortsChecked})
             })
-            .then(resp => resp.json())
-            .then(data => {
-                this.setState({recentSave: true})
-            })
-        } else {
-            fetch('https://oscars-checklist-backend.herokuapp.com/api/saved', {
-                method: 'POST',
-                headers: {
-                'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({movies: this.state.moviesChecked, shorts: this.state.shortsChecked})
-            })
-            .then(resp => resp.json())
-            .then(data => {
-                this.setState({saveId: data['_id'], recentSave: true})
-            })
         }
+    }
+
+    saveList = () => {
+        fetch('https://oscars-checklist-backend.herokuapp.com/api/saved', {
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({movies: this.state.moviesChecked, shorts: this.state.shortsChecked})
+        })
+        .then(resp => resp.json())
+        .then(data => {
+            this.setState({saveId: data['_id'], recentSave: true})
+        })
     }
 
     render(){
@@ -96,7 +91,7 @@ class AllMoviesContainer extends Component {
                 <h2>Short Films</h2>
                 <MovieList checkMovie={this.checkMovie} movies={this.state.shorts} checked={this.state.shortsChecked} type='shorts'/>
                 <div className='bottom-spacing'></div>
-                <Savebox recentSave={this.state.recentSave} saveList={this.saveList} saveId={this.state.saveId}/>
+                {this.state.saveId === '' || this.state.recentSave ? <Savebox recentSave={this.state.recentSave} saveList={this.saveList} saveId={this.state.saveId}/> : <></>}
             </>
         )
     }
