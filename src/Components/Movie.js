@@ -37,7 +37,7 @@ const Movie = (props) => {
                 <AccordionDetails className={classes.nominations}>
                     {props.movie.nominations.map(nom => {
                         return (
-                            <div>
+                            <div key={props.movie.title + '-' + nom.category + '-' + nom.people}>
                                 <h3>{nom.category}</h3>
                                 <span>{nom.people}</span>
                                 <br />

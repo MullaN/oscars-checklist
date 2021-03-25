@@ -11,18 +11,19 @@ const Countdown = () => {
         let minutes = Math.floor(timeBetween / 1000 / 60 % 60)
         let seconds = Math.floor(timeBetween / 1000 % 60)
 
-        return {days, hours, minutes, seconds}
+        return {timeBetween, days, hours, minutes, seconds}
     }
 
     const [countdown, setCountDown] = useState(timeLeft())
 
     useEffect(() => {
-        const timeout = setTimeout(setCountDown(timeLeft()),1000)
+        const timeout = setTimeout(() => setCountDown(timeLeft()),1000)
         return () => clearTimeout(timeout)
     })
 
     return( 
-            countdown.seconds > 0 ?
+        <>
+            {countdown.timeBetween > 0 ?
                 <Grid container className='countdown' spacing={4} justify='center'>
                     {countdown.days >= 1 ?                     
                         <Grid item>
@@ -52,8 +53,9 @@ const Countdown = () => {
             countdown.hours > -4 ? 
             <span id='live-text'>OSCARS ARE LIVE!</span>
             :
-            <></>
-            
+            <></>}
+        <br/>
+        </>
     )
 }
 

@@ -48,11 +48,26 @@ class App extends Component {
     this.setState({[`${type}Checked`]: tempChecked, recentSave: false})
   }
 
+  saveList = () => {
+    fetch('http://192.168.50.119:5000/api/saved', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({movies: this.state.moviesChecked, shorts: this.state.shortsChecked})
+    })
+    .then(resp => resp.json())
+    .then(data => {
+      this.setState({recentSave: true})
+    })
+  }
+
   render(){
     return (
       <div className="App">
         <h1>2021 OSCARS Checklist</h1>
         <Countdown />
+        <button onClick={this.saveList}>Save List</button>
         <h2>Feature Films</h2>
         <MovieList checkMovie={this.checkMovie} movies={this.state.movies} checked={this.state.moviesChecked} type='movies'/>
         <h2>Short Films</h2>
