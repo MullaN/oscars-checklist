@@ -25,7 +25,7 @@ const Movie = (props) => {
     return (
         <div>
             <Accordion>
-                <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls='panelia-content' id={`title-${props.movie.id}-header`}>
+                <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls='panel1a-content' id={`title-${props.movie.id}-header`}>
                     <FormControlLabel
                     aria-label="Acknowledge"
                     onClick={(event) => event.stopPropagation()}

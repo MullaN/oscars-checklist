@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import MovieList from './MovieList';
 import history from '../history';
 import Savebox from '../Components/Savebox'
+import FilterBox from '../Components/FilterBox'
 
 class AllMoviesContainer extends Component {
     state = {
@@ -86,6 +87,7 @@ class AllMoviesContainer extends Component {
         }
         return ( 
             <>
+                <FilterBox></FilterBox>
                 <h2>Feature Films</h2>
                 <MovieList checkMovie={this.checkMovie} movies={this.state.movies} checked={this.state.moviesChecked} type='movies'/>
                 <h2>Short Films</h2>
