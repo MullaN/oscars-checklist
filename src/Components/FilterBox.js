@@ -5,6 +5,9 @@ import MuiAccordionSummary from '@material-ui/core/AccordionSummary';
 import MuiAccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
 import FilterListIcon from '@material-ui/icons/FilterList';
+import Grid from '@material-ui/core/Grid'
+import FormControlLabel from '@material-ui/core/FormControlLabel'
+import Checkbox from '@material-ui/core/Checkbox'
 
 const Accordion = withStyles({
   root: {
@@ -25,7 +28,6 @@ const Accordion = withStyles({
 const AccordionSummary = withStyles({
   root: {
     backgroundColor: 'rgb(235, 226, 190)',
-    borderBottom: '1px solid rgba(0, 0, 0, .125)',
     marginBottom: -1,
     minHeight: 56,
     '&$expanded': {
@@ -46,7 +48,7 @@ const AccordionDetails = withStyles((theme) => ({
   },
 }))(MuiAccordionDetails);
 
-export default function FilterBox() {
+export default function FilterBox(props) {
   const [expanded, setExpanded] = React.useState('panel1');
 
   const handleChange = (panel) => (event, newExpanded) => {
@@ -61,6 +63,27 @@ export default function FilterBox() {
           <Typography>Filter Movies By Award</Typography>
         </AccordionSummary>
         <AccordionDetails>
+            <Grid
+                container
+                direction="row"
+                justify="flex-start"
+                alignItems="center"
+            >
+                {props.categories.map(category => {
+                    return(
+                        <Grid item>
+                            <FormControlLabel
+                                aria-label="Acknowledge"
+                                onClick={(event) => event.stopPropagation()}
+                                onFocus={(event) => event.stopPropagation()}
+                                control={<Checkbox color='primary' checked='true'/>}
+                                label={<Typography>{category}</Typography>}
+                                />
+                        </Grid>
+                    )
+                    })                    
+                }
+            </Grid>
         </AccordionDetails>
       </Accordion>
     </div>

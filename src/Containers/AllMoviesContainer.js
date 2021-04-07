@@ -10,6 +10,7 @@ class AllMoviesContainer extends Component {
         shorts: [],
         moviesChecked: [],
         shortsChecked: [],
+        categories: [],
         recentSave: false,
         saveId: (this.props.match ? this.props.match.params.id : '')
       }
@@ -22,6 +23,22 @@ class AllMoviesContainer extends Component {
         .then(([movies, shorts]) => {
             this.setupMovie(movies, 'movies')
             this.setupMovie(shorts, 'shorts')
+            let movieCategories = {}
+            movies.forEach(movie => {
+                movie.nominations.forEach(nom => {
+                    if (!(nom.category in movieCategories)){
+                        movieCategories[nom.category] = 1
+                    } else {
+                        movieCategories[nom.category] += 1
+                    }
+                })
+            })
+            let categories = Object.keys(movieCategories).sort((a, b) => {
+                if(a < b) { return -1; }
+                if(a > b) { return 1; }
+                return 0;
+            })
+            this.setState({categories})
         })
         .then(() => {
             if (this.props.match && this.props.match.params.id) {
@@ -87,7 +104,7 @@ class AllMoviesContainer extends Component {
         }
         return ( 
             <>
-                <FilterBox></FilterBox>
+                <FilterBox categories={this.state.categories}/>
                 <h2>Feature Films</h2>
                 <MovieList checkMovie={this.checkMovie} movies={this.state.movies} checked={this.state.moviesChecked} type='movies'/>
                 <h2>Short Films</h2>
