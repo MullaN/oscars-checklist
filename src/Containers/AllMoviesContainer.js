@@ -38,6 +38,9 @@ class AllMoviesContainer extends Component {
                 if(a > b) { return 1; }
                 return 0;
             })
+            categories = categories.map(category => {
+                return {'category': category, checked: true}
+            })
             this.setState({categories})
         })
         .then(() => {
