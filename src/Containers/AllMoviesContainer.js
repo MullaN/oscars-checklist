@@ -33,6 +33,15 @@ class AllMoviesContainer extends Component {
                     }
                 })
             })
+            shorts.forEach(short => {
+                short.nominations.forEach(nom => {
+                    if (!(nom.category in categories)){
+                        categories[nom.category] = {checked: true, movies: [short.title]}
+                    } else {
+                        categories[nom.category].movies.push(short.title)
+                    }
+                })
+            })
             this.setState({categories})
         })
         .then(() => {
@@ -83,7 +92,8 @@ class AllMoviesContainer extends Component {
     checkFilter = (category) => {
         let tempCategories = {...this.state.categories}
         let foundCategory = tempCategories[category]
-        let tempMovies = [...this.state.movies]
+        let moviesOrShorts = category.includes('Short') ? 'shorts' : 'movies'
+        let tempMovies = [...this.state[moviesOrShorts]]
         let tempMovie
         if (foundCategory.checked) {
             foundCategory.movies.forEach(movie => {
@@ -97,7 +107,7 @@ class AllMoviesContainer extends Component {
             })
         }
         foundCategory.checked = !foundCategory.checked
-        this.setState({movies: tempMovies, categories: tempCategories})
+        this.setState({[moviesOrShorts]: tempMovies, categories: tempCategories})
     }
 
     saveList = () => {
@@ -130,8 +140,15 @@ class AllMoviesContainer extends Component {
                 <>
                 </>
                 }
-                <h2>Short Films</h2>
-                <MovieList checkMovie={this.checkMovie} movies={this.state.shorts} checked={this.state.shortsChecked} type='shorts'/>
+                {this.state.shorts.filter(movie => movie.shownCategories > 0).length > 0 ? 
+                <>
+                    <h2>Short Films</h2>
+                    <MovieList checkMovie={this.checkMovie} movies={this.state.shorts} checked={this.state.shortsChecked} type='shorts'/>
+                </>
+                :
+                <>
+                </>
+                }
                 <div className='bottom-spacing'></div>
                 {this.state.saveId === '' || this.state.recentSave ? <Savebox recentSave={this.state.recentSave} saveList={this.saveList} saveId={this.state.saveId}/> : <></>}
             </>
