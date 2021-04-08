@@ -55,6 +55,12 @@ export default function FilterBox(props) {
     setExpanded(newExpanded ? panel : false);
   };
 
+  const categories = Object.keys(props.categories).sort((a,b) => {
+      if(a < b) return -1
+      if(b > a) return 1
+      return 0
+  })
+
   return (
     <div>
       <Accordion square expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
@@ -69,15 +75,15 @@ export default function FilterBox(props) {
                 justify="flex-start"
                 alignItems="center"
             >
-                {props.categories.map(category => {
+                {categories.map(category => {
                     return(
                         <Grid item>
                             <FormControlLabel
                                 aria-label="Acknowledge"
                                 onClick={(event) => event.stopPropagation()}
                                 onFocus={(event) => event.stopPropagation()}
-                                control={<Checkbox color='primary' checked={category.checked}/>}
-                                label={<Typography>{category.category}</Typography>}
+                                control={<Checkbox color='primary' checked={props.categories[category].checked}/>}
+                                label={<Typography>{category}</Typography>}
                                 />
                         </Grid>
                     )

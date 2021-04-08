@@ -10,7 +10,7 @@ class AllMoviesContainer extends Component {
         shorts: [],
         moviesChecked: [],
         shortsChecked: [],
-        categories: [],
+        categories: {},
         recentSave: false,
         saveId: (this.props.match ? this.props.match.params.id : '')
       }
@@ -23,23 +23,15 @@ class AllMoviesContainer extends Component {
         .then(([movies, shorts]) => {
             this.setupMovie(movies, 'movies')
             this.setupMovie(shorts, 'shorts')
-            let movieCategories = {}
+            let categories = {}
             movies.forEach(movie => {
                 movie.nominations.forEach(nom => {
-                    if (!(nom.category in movieCategories)){
-                        movieCategories[nom.category] = 1
+                    if (!(nom.category in categories)){
+                        categories[nom.category] = {checked: true, movies: [movie]}
                     } else {
-                        movieCategories[nom.category] += 1
+                        categories[nom.category].movies.push(movie)
                     }
                 })
-            })
-            let categories = Object.keys(movieCategories).sort((a, b) => {
-                if(a < b) { return -1; }
-                if(a > b) { return 1; }
-                return 0;
-            })
-            categories = categories.map(category => {
-                return {'category': category, checked: true}
             })
             this.setState({categories})
         })
@@ -86,6 +78,8 @@ class AllMoviesContainer extends Component {
             })
         }
     }
+
+    check
 
     saveList = () => {
         fetch('https://oscars-checklist-backend.herokuapp.com/api/saved', {
