@@ -121,8 +121,15 @@ class AllMoviesContainer extends Component {
         return ( 
             <>
                 <FilterBox categories={this.state.categories} checkFilter={this.checkFilter}/>
-                <h2>Feature Films</h2>
-                <MovieList checkMovie={this.checkMovie} movies={this.state.movies} checked={this.state.moviesChecked} type='movies'/>
+                {this.state.movies.filter(movie => movie.shownCategories > 0).length > 0 ? 
+                <>
+                    <h2>Feature Films</h2>
+                    <MovieList checkMovie={this.checkMovie} movies={this.state.movies} checked={this.state.moviesChecked} type='movies'/>
+                </>
+                :
+                <>
+                </>
+                }
                 <h2>Short Films</h2>
                 <MovieList checkMovie={this.checkMovie} movies={this.state.shorts} checked={this.state.shortsChecked} type='shorts'/>
                 <div className='bottom-spacing'></div>
