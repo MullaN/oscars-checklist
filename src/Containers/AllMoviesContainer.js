@@ -52,6 +52,7 @@ class AllMoviesContainer extends Component {
             if(editedA > editedB) { return 1; }
             return 0;
         })
+        data = data.map(d => ({...d, shownCategories: d.nominations.length}))
         let checked = data.map(movie => {
             let checkedObj = {
                 'id': movie.id,
@@ -79,7 +80,9 @@ class AllMoviesContainer extends Component {
         }
     }
 
-    check
+    checkFilter = (category) => {
+
+    }
 
     saveList = () => {
         fetch('https://oscars-checklist-backend.herokuapp.com/api/saved', {
