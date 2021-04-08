@@ -27,9 +27,9 @@ class AllMoviesContainer extends Component {
             movies.forEach(movie => {
                 movie.nominations.forEach(nom => {
                     if (!(nom.category in categories)){
-                        categories[nom.category] = {checked: true, movies: [movie]}
+                        categories[nom.category] = {checked: true, movies: [movie.title]}
                     } else {
-                        categories[nom.category].movies.push(movie)
+                        categories[nom.category].movies.push(movie.title)
                     }
                 })
             })
@@ -65,7 +65,7 @@ class AllMoviesContainer extends Component {
     }
 
     checkMovie = (id, type) => {
-        let tempChecked = this.state[`${type}Checked`]
+        let tempChecked = [...this.state[`${type}Checked`]]
         let findCheck = tempChecked.filter(check => check.id === id)[0]
         findCheck.checked = !findCheck.checked
         this.setState({[`${type}Checked`]: tempChecked})
@@ -81,7 +81,23 @@ class AllMoviesContainer extends Component {
     }
 
     checkFilter = (category) => {
-
+        let tempCategories = {...this.state.categories}
+        let foundCategory = tempCategories[category]
+        let tempMovies = [...this.state.movies]
+        let tempMovie
+        if (foundCategory.checked) {
+            foundCategory.movies.forEach(movie => {
+                tempMovie = tempMovies.filter(m => m.title === movie)[0]
+                tempMovie.shownCategories--
+            })
+        } else {
+            foundCategory.movies.forEach(movie => {
+                tempMovie = tempMovies.filter(m => m.title === movie)[0]
+                tempMovie.shownCategories++
+            })
+        }
+        foundCategory.checked = !foundCategory.checked
+        this.setState({movies: tempMovies, categories: tempCategories})
     }
 
     saveList = () => {
@@ -104,7 +120,7 @@ class AllMoviesContainer extends Component {
         }
         return ( 
             <>
-                <FilterBox categories={this.state.categories}/>
+                <FilterBox categories={this.state.categories} checkFilter={this.checkFilter}/>
                 <h2>Feature Films</h2>
                 <MovieList checkMovie={this.checkMovie} movies={this.state.movies} checked={this.state.moviesChecked} type='movies'/>
                 <h2>Short Films</h2>

@@ -82,7 +82,7 @@ export default function FilterBox(props) {
                                 aria-label="Acknowledge"
                                 onClick={(event) => event.stopPropagation()}
                                 onFocus={(event) => event.stopPropagation()}
-                                control={<Checkbox color='primary' checked={props.categories[category].checked}/>}
+                                control={<Checkbox color='primary' checked={props.categories[category].checked} onClick={() => props.checkFilter(category)}/>}
                                 label={<Typography>{category}</Typography>}
                                 />
                         </Grid>
