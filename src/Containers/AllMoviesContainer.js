@@ -124,13 +124,23 @@ class AllMoviesContainer extends Component {
         })
     }
 
+    filterAllBehavior = (clear) => {
+        let movies = [...this.state.movies]
+        let shorts = [...this.state.shorts]
+        let categories = {...this.state.categories}
+        movies.forEach(movie => movie.shownCategories = clear ? 0 : movie.nominations.length)
+        shorts.forEach(movie => movie.shownCategories = clear ? 0 : movie.nominations.length)
+        Object.keys(categories).forEach(category => categories[category].checked = clear ? false : true)
+        this.setState({movies, shorts, categories})
+    }
+
     render(){
         if (this.state.saveId !== "" && !this.props.match){
             history.push(`/${this.state.saveId}`)
         }
         return ( 
             <>
-                <FilterBox categories={this.state.categories} checkFilter={this.checkFilter}/>
+                <FilterBox categories={this.state.categories} checkFilter={this.checkFilter} filterAllBehavior={this.filterAllBehavior}/>
                 {this.state.movies.filter(movie => movie.shownCategories > 0).length > 0 ? 
                 <>
                     <h2>Feature Films</h2>

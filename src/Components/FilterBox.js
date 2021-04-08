@@ -8,6 +8,7 @@ import FilterListIcon from '@material-ui/icons/FilterList';
 import Grid from '@material-ui/core/Grid'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Checkbox from '@material-ui/core/Checkbox'
+import { Button } from '@material-ui/core';
 
 const Accordion = withStyles({
   root: {
@@ -89,6 +90,15 @@ export default function FilterBox(props) {
                     )
                     })                    
                 }
+                <Grid item xs={12}>
+
+                </Grid>
+                <Grid item>
+                    <Button onClick={() => props.filterAllBehavior(false)}>Select All</Button>
+                </Grid>
+                <Grid item>
+                    <Button onClick={() => props.filterAllBehavior(true)}>Select None</Button>
+                </Grid>
             </Grid>
         </AccordionDetails>
       </Accordion>
