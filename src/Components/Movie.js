@@ -20,24 +20,24 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const Movie = (props) => {
+const Movie = ({movie, checked, type, checkMovie}) => {
     const classes = useStyles()
     return (
         <div>
             <Accordion>
-                <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls='panel1a-content' id={`title-${props.movie.id}-header`}>
+                <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls='panel1a-content' id={`title-${movie.id}-header`}>
                     <FormControlLabel
                     aria-label="Acknowledge"
                     onClick={(event) => event.stopPropagation()}
                     onFocus={(event) => event.stopPropagation()}
-                    control={<Checkbox color='primary' checked={props.checked} onClick={() => props.checkMovie(props.movie.id, props.type)}/>}
-                    label={<Typography className={classes.movie}>{props.movie.title}</Typography>}
+                    control={<Checkbox color='primary' checked={checked} onClick={() => checkMovie(movie.id, type)}/>}
+                    label={<Typography className={classes.movie}>{movie.title}</Typography>}
                     />
                 </AccordionSummary>
                 <AccordionDetails className={classes.nominations}>
-                    {props.movie.nominations.map(nom => {
+                    {movie.nominations.map(nom => {
                         return (
-                            <div key={props.movie.title + '-' + nom.category + '-' + nom.people}>
+                            <div key={movie.title + '-' + nom.category + '-' + nom.people}>
                                 <h3>{nom.category}</h3>
                                 <span>{nom.people}</span>
                                 <br />
