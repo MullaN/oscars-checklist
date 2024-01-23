@@ -78,7 +78,7 @@ export default function FilterBox(props) {
             >
                 {categories.map(category => {
                     return(
-                        <Grid item>
+                        <Grid item key={category}>
                             <FormControlLabel
                                 aria-label="Acknowledge"
                                 onClick={(event) => event.stopPropagation()}
