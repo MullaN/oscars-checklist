@@ -4,7 +4,7 @@ import Grid from '@material-ui/core/Grid'
 const Countdown = () => {
     const timeLeft = () => {
         let startTime = new Date()
-        let oscarTime = new Date('March 10 2024 16:00:00 UTC-0800')
+        let oscarTime = new Date('March 2 2025 16:00:00 UTC-0800')
         let timeBetween = oscarTime - startTime + 1000
         let days = Math.floor(timeBetween / 1000 / 60 / 60 / 24)
         let hours = Math.floor(timeBetween / 1000 / 60 / 60 % 24)
